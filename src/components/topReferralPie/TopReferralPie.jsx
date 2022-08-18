@@ -11,9 +11,6 @@ const TopReferralPie = () => {
   const [labels, setLabels] = useState();
   const [referralUniqueEventCount, setReferralUniqueEventCount] = useState();
 
-  console.log(labels);
-  console.log(referralUniqueEventCount);
-
   const data = {
     labels,
     datasets: [

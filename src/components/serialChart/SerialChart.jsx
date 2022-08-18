@@ -28,7 +28,7 @@ ChartJS.register(
   BarController
 );
 
-const Dau = ({ data }) => {
+const SerialChart = ({ data }) => {
   if (data !== undefined) {
     const labels = data.map((item) => item[0]);
 
@@ -64,7 +64,7 @@ const Dau = ({ data }) => {
   }
 };
 
-export default Dau;
+export default SerialChart;
 
 const Container = styled.div`
   width: 90%;

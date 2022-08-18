@@ -7,7 +7,7 @@ import "react-grid-layout/css/styles.css";
 
 import SumUniqueEventCount from "../components/sumUniqueEventCount/SumUniqueEventCount";
 import SumTotalEventCount from "../components/sumTotalEventCount/SumTotalEventCount";
-import Dau from "../components/dau/Dau";
+import SerialChart from "../components/serialChart/SerialChart";
 import TopReferralCircle from "../components/topReferralPie/TopReferralPie";
 import TopReferralTable from "../components/topReferralTable/TopReferralTable";
 
@@ -100,7 +100,7 @@ const Main = (props) => {
           />
         </div>
         <div key="c" style={{ ...widgetStyle }}>
-          <Dau data={sortedDataByDate} />
+          <SerialChart data={sortedDataByDate} />
         </div>
         <div key="d" style={{ ...widgetStyle }}>
           <TopReferralCircle />

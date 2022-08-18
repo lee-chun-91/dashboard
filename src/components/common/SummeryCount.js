@@ -5,7 +5,7 @@ const SummeryCount = ({ count, compareCount }) => {
   return (
     <>
       <Count>{count}</Count>
-      <CompareCount>{compareCount}</CompareCount>
+      <CompareCount>전일 대비 {compareCount}</CompareCount>
     </>
   );
 };

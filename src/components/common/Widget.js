@@ -29,4 +29,6 @@ const Wrapper = styled.div`
   width: 90%;
   height: 90%;
   padding-top: 10px;
+  display: flex;
+  flex-direction: column;
 `;
