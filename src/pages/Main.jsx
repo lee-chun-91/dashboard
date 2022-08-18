@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import apis from "../apis/apis";
 import styled from "styled-components";
 
-import GridLayout, { Responsive, WidthProvider } from "react-grid-layout";
+import GridLayout from "react-grid-layout";
 // div resize 를 위해 import
 import "react-resizable/css/styles.css";
 import "react-grid-layout/css/styles.css";
@@ -14,9 +14,9 @@ import TopReferralCircle from "../components/topReferralCircle/TopReferralCircle
 import TopReferralTable from "../components/topReferralTable/TopReferralTable";
 
 const Main = (props) => {
-  const [summery, setSummery] = useState();
-
-  const ResponsiveGridLayout = WidthProvider(Responsive);
+  // const [summeryData, setSummeryData] = useState();
+  const [uniqueEventCount, setUniqueEventCount] = useState();
+  const [totalEventCount, setTotalEventCount] = useState();
 
   const layout = [
     { i: "a", x: 0, y: 0, w: 6, h: 1 },
@@ -26,14 +26,27 @@ const Main = (props) => {
     { i: "e", x: 6, y: 3, w: 6, h: 3 },
   ];
 
-  // useEffect(() => {
-  // apis.getSummeryInfo().then((response) => {
-  //   console.log(response);
-  // });
-  // apis.getPieChartInfo().then((response) => {
-  //   console.log(response);
-  // });
-  // }, []);
+  const widgetStyle = {
+    backgroundColor: "white",
+    border: "1px solid #919191",
+    boxShadow: "1px 2px 9px #919191",
+  };
+
+  useEffect(() => {
+    apis.getSummeryInfo().then((response) => {
+      const uniqueEventCount = response.data.data.rows
+        .reduce((prev, curr) => prev[1] + curr[1], 0)
+        .toString()
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      setUniqueEventCount(uniqueEventCount);
+
+      const totalEventCount = response.data.data.rows
+        .reduce((prev, curr) => prev[2] + curr[2], 0)
+        .toString()
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      setTotalEventCount(totalEventCount);
+    });
+  }, []);
 
   return (
     <>
@@ -41,55 +54,23 @@ const Main = (props) => {
         className="layout"
         layout={layout}
         cols={16}
-        rowHeight={120}
+        rowHeight={180}
         width={1200}
-        // breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-        // cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
         style={{ backgroundColor: "#c2c2c2" }}
       >
-        <div
-          key="a"
-          style={{
-            backgroundColor: "white",
-            border: "1px solid rgba(224, 224, 224, 0.7)",
-          }}
-        >
-          <SumUniqueEventCount />
+        <div key="a" style={{ ...widgetStyle }}>
+          <SumUniqueEventCount count={uniqueEventCount} />
         </div>
-        <div
-          key="b"
-          style={{
-            backgroundColor: "white",
-            border: "1px solid rgba(224, 224, 224, 0.7)",
-          }}
-        >
-          <SumTotalEventCount />
+        <div key="b" style={{ ...widgetStyle }}>
+          <SumTotalEventCount count={totalEventCount} />
         </div>
-        <div
-          key="c"
-          style={{
-            backgroundColor: "white",
-            border: "1px solid rgba(224, 224, 224, 0.7)",
-          }}
-        >
+        <div key="c" style={{ ...widgetStyle }}>
           <Dau />
         </div>
-        <div
-          key="d"
-          style={{
-            backgroundColor: "white",
-            border: "1px solid rgba(224, 224, 224, 0.7)",
-          }}
-        >
+        <div key="d" style={{ ...widgetStyle }}>
           <TopReferralCircle />
         </div>
-        <div
-          key="e"
-          style={{
-            backgroundColor: "white",
-            border: "1px solid rgba(224, 224, 224, 0.7)",
-          }}
-        >
+        <div key="e" style={{ ...widgetStyle }}>
           <TopReferralTable />
         </div>
         /
@@ -99,9 +80,3 @@ const Main = (props) => {
 };
 
 export default Main;
-
-const Container = styled.div`
-  width: 100%;
-  height: 100%;
-  background-color: gray;
-`;

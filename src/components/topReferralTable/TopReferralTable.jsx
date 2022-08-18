@@ -9,18 +9,14 @@ import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 
 const TopReferralTable = () => {
-  const gridRef = useRef();
-
   const [rowData, setRowData] = useState();
   const [columnDefs, setColumnDefs] = useState();
+
   const groupDisplayType = "singleColumn";
-
-  console.log(columnDefs);
-
+  const gridRef = useRef();
   const defaultColDef = useMemo(() => ({
     sortable: true,
   }));
-
   const autoGroupColumnDef = {
     headerName: "Country(IP) > Region(IP) > City(IP)",
     minWidth: 270,
@@ -64,7 +60,7 @@ const TopReferralTable = () => {
 
   return (
     <Widget title={"Top Referral"}>
-      <div className="ag-theme-alpine" style={{ height: "80%", width: "80%" }}>
+      <div className="ag-theme-alpine" style={{ height: "95%", width: "90%" }}>
         <AgGridReact
           ref={gridRef}
           rowData={rowData}
