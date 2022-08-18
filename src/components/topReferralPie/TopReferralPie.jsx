@@ -12,6 +12,7 @@ const TopReferralPie = () => {
   const [referralUniqueEventCount, setReferralUniqueEventCount] = useState();
 
   console.log(labels);
+  console.log(referralUniqueEventCount);
 
   const data = {
     labels,
@@ -40,29 +41,6 @@ const TopReferralPie = () => {
     ],
   };
 
-  const getSortedArr = (array) => {
-    // 1. 출연 빈도 구하기
-    const counts = array.reduce((pv, cv) => {
-      pv[cv] = (pv[cv] || 0) + 1;
-      return pv;
-    }, {});
-
-    // 2. 요소와 개수를 표현하는 배열 생성
-    let result = [];
-    for (let key in counts) {
-      result.push([key, counts[key]]);
-    }
-
-    // 3. 출현 빈도별 정리
-    result.sort((first, second) => {
-      return second[1] - first[1];
-    });
-
-    result = result.filter((item, index) => index < 5).map((item) => item[0]);
-
-    return result;
-  };
-
   useEffect(() => {
     apis.getPieChartInfo().then((response) => {
       // 1. sort response data
@@ -70,35 +48,33 @@ const TopReferralPie = () => {
         .map((item) => [item[0], Number(item[1])])
         .sort((a, b) => b[1] - a[1]);
 
-      // hostnameFrequency & setLabels
-      let hostname = sortedDataByCount.map((item) => {
-        let hostname = item[0].split(/\.co|\.com|\.io|\.net/)[0].split(".");
-        return hostname[hostname.length - 1];
-      });
-      console.log(hostname);
+      // labels
+      const top4Referrals = sortedDataByCount.filter(
+        (item, index) => index < 4
+      );
+      const labels = top4Referrals.map((item, index) => item[0]);
+      setLabels([...labels, "etc"]);
 
-      let hostnameFrequencyTop4 = getSortedArr(hostname);
-      setLabels([...hostnameFrequencyTop4, "etc"]);
+      // Unique Event Count per referral
+      const uniqueEventCount = [0, 0, 0, 0, 0];
+      // console.log(uniqueEventCount);
 
-      // dataSet
-      let dataset = [0, 0, 0, 0, 0, 0];
-
-      sortedDataByCount.forEach((item) => {
-        if (item[0].includes(hostnameFrequencyTop4[0])) {
-          dataset[0] += item[1];
-        } else if (item[0].includes(hostnameFrequencyTop4[1])) {
-          dataset[1] += item[1];
-        } else if (item[0].includes(hostnameFrequencyTop4[2])) {
-          dataset[2] += item[1];
-        } else if (item[0].includes(hostnameFrequencyTop4[3])) {
-          dataset[3] += item[1];
-        } else if (item[0].includes(hostnameFrequencyTop4[4])) {
-          dataset[4] += item[1];
+      sortedDataByCount.forEach((item, index) => {
+        if (index === 0) {
+          uniqueEventCount[0] = item[1];
+        } else if (index === 1) {
+          uniqueEventCount[1] = item[1];
+        } else if (index === 2) {
+          uniqueEventCount[2] = item[1];
+        } else if (index === 3) {
+          uniqueEventCount[3] = item[1];
         } else {
-          dataset[5] += item[1];
+          uniqueEventCount[4] += item[1];
         }
+
+        // console.log(uniqueEventCount);
+        setReferralUniqueEventCount(uniqueEventCount);
       });
-      setReferralUniqueEventCount(dataset);
     });
   }, []);
 
