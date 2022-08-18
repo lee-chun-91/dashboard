@@ -1,13 +1,8 @@
 import React from "react";
-import styled from "styled-components";
-import Layout from "../common/Layout";
+import Widget from "../common/Widget";
 
 const Dau = () => {
-  return (
-    <Layout>
-      <div>dau</div>
-    </Layout>
-  );
+  return <Widget title={"DAU"}></Widget>;
 };
 
 export default Dau;
