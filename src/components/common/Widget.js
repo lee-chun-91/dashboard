@@ -15,8 +15,8 @@ export default Widget;
 const Container = styled.div`
   width: 100%;
   height: 100%;
-  padding: 10px;
-  border: 1px solid rgba(224, 224, 224, 0.7);
+  // padding: 10px 10px 0;
+  // border: 1px solid rgba(224, 224, 224, 0.7);
 `;
 
 const Wrapper = styled.div`
