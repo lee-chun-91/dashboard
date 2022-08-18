@@ -2,16 +2,19 @@ import React, { useState, useEffect } from "react";
 import apis from "../../apis/apis";
 import Widget from "../common/Widget";
 
-const TopReferralCircle = () => {
+const TopReferralPie = () => {
   const [data, setData] = useState();
 
   useEffect(() => {
     apis.getPieChartInfo().then((response) => {
-      console.log(response);
+      const data = response.data.data.rows;
+      // console.log(data);
+
+      
     });
   }, []);
 
   return <Widget title={"Top Referral"}></Widget>;
 };
 
-export default TopReferralCircle;
+export default TopReferralPie;

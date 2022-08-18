@@ -15,13 +15,14 @@ export default Widget;
 const Container = styled.div`
   width: 100%;
   height: 100%;
-  padding: 10px 10px;
+  padding: 10px 20px;
 `;
 
 const Title = styled.div`
   color: #4d81f9;
   font-weight: 600;
-  font-size: 16px;
+  font-size: 1.2em;
+  padding-top: 10px;
 `;
 
 const Wrapper = styled.div`

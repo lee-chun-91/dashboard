@@ -13,10 +13,10 @@ const TopReferralTable = () => {
   const [columnDefs, setColumnDefs] = useState();
 
   const groupDisplayType = "singleColumn";
-  const gridRef = useRef();
   const defaultColDef = useMemo(() => ({
     sortable: true,
   }));
+
   const autoGroupColumnDef = {
     headerName: "Country(IP) > Region(IP) > City(IP)",
     minWidth: 270,
@@ -24,7 +24,7 @@ const TopReferralTable = () => {
 
   useEffect(() => {
     apis.getTableInfo().then((response) => {
-      // 1. rowData 할당
+      // 1. rowData
       let rawData = response.data.data.rows.map((value, index) => {
         return Object.assign({}, value);
       });
@@ -40,7 +40,7 @@ const TopReferralTable = () => {
 
       setRowData(data);
 
-      // 2. columnDefs 설정
+      // 2. columnDefs
       let columnDefs = response.data.data.headers.map((item, index) => {
         if (index !== 3) {
           return {
@@ -62,7 +62,6 @@ const TopReferralTable = () => {
     <Widget title={"Top Referral"}>
       <div className="ag-theme-alpine" style={{ height: "95%", width: "90%" }}>
         <AgGridReact
-          ref={gridRef}
           rowData={rowData}
           columnDefs={columnDefs}
           defaultColDef={defaultColDef}

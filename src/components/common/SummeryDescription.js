@@ -14,14 +14,13 @@ export default SummeryDescription;
 
 const DescriptionArea = styled.div`
   padding-top: 3px;
-  padding-left: 6px;
   display: flex;
   align-items: center;
 `;
 
 const Icon = styled.div`
-  display: inline;
   padding: 3px;
+  display: inline;
   border-radius: 3px;
   background-color: #e6e6e6;
   color: #919191;
