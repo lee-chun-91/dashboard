@@ -2,8 +2,8 @@
 
 - 수행기간 : 2022.08.17~2022.08.19
 - 주요내용
-  : 위젯 리사이즈 & 드래그
-  : summery, serialChart, PieChart, Table
+  - 위젯 리사이즈 & 드래그
+  - summery, serialChart, PieChart, Table
 
 ## 🤩 데모
 
