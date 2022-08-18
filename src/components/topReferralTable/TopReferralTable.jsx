@@ -13,13 +13,16 @@ const TopReferralTable = () => {
   const [columnDefs, setColumnDefs] = useState();
 
   const groupDisplayType = "singleColumn";
-  const defaultColDef = useMemo(() => ({
-    sortable: true,
-  }));
+  const defaultColDef = useMemo(
+    () => ({
+      sortable: true,
+    }),
+    []
+  );
 
   const autoGroupColumnDef = {
     headerName: "Country(IP) > Region(IP) > City(IP)",
-    minWidth: 270,
+    minWidth: 300,
   };
 
   useEffect(() => {
@@ -28,7 +31,7 @@ const TopReferralTable = () => {
       let rawData = response.data.data.rows.map((value, index) => {
         return Object.assign({}, value);
       });
-
+      
       const data = rawData.map((item) => {
         return {
           ip_country: item["0"],

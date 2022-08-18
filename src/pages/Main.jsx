@@ -24,8 +24,8 @@ const Main = (props) => {
     { i: "a", x: 0, y: 0, w: 6, h: 1 },
     { i: "b", x: 6, y: 0, w: 6, h: 1 },
     { i: "c", x: 0, y: 1, w: 12, h: 3 },
-    { i: "d", x: 0, y: 3, w: 6, h: 3 },
-    { i: "e", x: 6, y: 3, w: 6, h: 3 },
+    { i: "d", x: 0, y: 4, w: 6, h: 3 },
+    { i: "e", x: 6, y: 4, w: 6, h: 3 },
   ];
 
   const widgetStyle = {
@@ -82,7 +82,7 @@ const Main = (props) => {
       <GridLayout
         className="layout"
         layout={layout}
-        cols={16}
+        cols={12}
         rowHeight={180}
         width={1200}
         style={{ backgroundColor: "#c2c2c2" }}

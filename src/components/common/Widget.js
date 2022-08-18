@@ -26,7 +26,7 @@ const Title = styled.div`
 `;
 
 const Wrapper = styled.div`
-  width: 100%;
+  width: 90%;
   height: 90%;
   padding-top: 10px;
 `;
